@@ -1,5 +1,9 @@
 
 const bookList = document.getElementById('book-list');
+const bodyClass = document.getElementsByClassName('body');
+const body = bodyClass[0];
+const addBookButton = document.getElementById('add-book-button');
+
 let myLibrary = [];
 
 function Book(title, author, pages, read){
@@ -64,6 +68,12 @@ function displayLibrary(){
         newBookAuthor.appendChild(bookAuthor);
         newBookPages.appendChild(bookPages);
         newBookRead.appendChild(bookRead);
+        
+        // style if a book has been read
+        myLibrary[i].read == true ? newBookRead.style.fontStyle = 'italic' : newBookRead.style.fontWeight = '900';
+        if(myLibrary[i].read == true){
+            newBookRead.style.color = 'grey'
+        };      
 
         newLi.appendChild(newBookTitle);
         newLi.appendChild(newBookAuthor);
@@ -75,4 +85,129 @@ function displayLibrary(){
     }
 }
 
+function createFormOnButtonClick(){
+
+    let formDiv = document.createElement('div');
+    formDiv.setAttribute('id', 'add-book-form-container');
+
+    let greyout = document.createElement('div');
+    greyout.setAttribute('id', 'greyout');
+
+    let form = document.createElement('form');
+    form.setAttribute('id', 'form');
+
+    let formNewBookTitle = document.createElement('label')
+    formNewBookTitle.setAttribute('for', 'title')
+    let formNewBookTitleText = document.createTextNode('Title');
+    formNewBookTitle.appendChild(formNewBookTitleText);
+    let formNewBookTitleInput = document.createElement('input');
+    formNewBookTitleInput.setAttribute('type', 'text');
+    formNewBookTitleInput.setAttribute('id', 'title');
+    formNewBookTitleInput.setAttribute('name', 'title');
+
+    let formNewBookAuthor = document.createElement('label')
+    formNewBookAuthor.setAttribute('for', 'author')
+    let formNewBookAuthorText = document.createTextNode('Author');
+    formNewBookAuthor.appendChild(formNewBookAuthorText);
+    let formNewBookAuthorInput = document.createElement('input');
+    formNewBookAuthorInput.setAttribute('type', 'text');
+    formNewBookAuthorInput.setAttribute('id', 'author');
+    formNewBookAuthorInput.setAttribute('name', 'author');
+
+    let formNewBookPages = document.createElement('label')
+    formNewBookPages.setAttribute('for', 'pages')
+    let formNewBookPagesText = document.createTextNode('Pages');
+    formNewBookPages.appendChild(formNewBookPagesText);
+    let formNewBookPagesInput = document.createElement('input');
+    formNewBookPagesInput.setAttribute('type', 'number');
+    formNewBookPagesInput.setAttribute('id', 'pages');
+    formNewBookPagesInput.setAttribute('name', 'pages');
+
+    let formNewBookRead = document.createElement('label')
+    formNewBookRead.setAttribute('for', 'read')
+    let formNewBookReadText = document.createTextNode("I've Already Read This");
+    formNewBookRead.appendChild(formNewBookReadText);
+    let formNewBookReadInput = document.createElement('input');
+    formNewBookReadInput.setAttribute('type', 'checkbox');
+    formNewBookReadInput.setAttribute('id', 'read');
+    formNewBookReadInput.setAttribute('name', 'read');
+
+    let formNewBookSubmit = document.createElement('input');
+    formNewBookSubmit.setAttribute('type', 'submit');
+    formNewBookSubmit.setAttribute('value', 'submit');
+    formNewBookSubmit.setAttribute('id', 'submit');
+
+    formDiv.appendChild(form);
+    form.appendChild(formNewBookTitle);
+    form.appendChild(formNewBookTitleInput);
+    form.appendChild(formNewBookAuthor);
+    form.appendChild(formNewBookAuthorInput);
+    form.appendChild(formNewBookPages);
+    form.appendChild(formNewBookPagesInput);
+    form.appendChild(formNewBookRead);
+    form.appendChild(formNewBookReadInput);
+    form.appendChild(formNewBookSubmit);
+
+    body.appendChild(formDiv);
+    body.appendChild(greyout);
+
+    // remove form if they click outside the box
+    let greyoutDiv = document.getElementById('greyout');
+    let addBookFormContainer = document.getElementById('add-book-form-container');
+    let Bookform = document.getElementById('form');
+
+    function submitNewBook(){
+ 
+        let titleInput = document.getElementById('title').value;
+        let authorInput = document.getElementById('author').value;
+        let pagesInput = document.getElementById('pages').value;
+        let readInput = document.getElementById('read').checked;
+    
+        console.log(titleInput);
+        console.log(authorInput);
+        console.log(pagesInput);
+        console.log(readInput);
+
+        let newBook = new Book(
+            titleInput,
+            authorInput,
+            pagesInput,
+        )
+
+        addBookToLibrary(newBook);
+
+        if(readInput == true){
+            newBook.readBook();
+        }
+
+        displayLibrary();
+    
+    }
+
+    function removeForm(){
+    
+        greyoutDiv.remove();
+        addBookFormContainer.remove();
+    
+    }
+
+    function submitButtonClick(e){
+
+        submitNewBook();
+        e.preventDefault();
+        removeForm();
+
+    }
+
+    greyoutDiv.addEventListener('click', removeForm);
+    Bookform.addEventListener('submit', submitButtonClick, false);
+
+
+}
+
+
 displayLibrary();
+
+addBookButton.addEventListener('click', createFormOnButtonClick);
+
+
