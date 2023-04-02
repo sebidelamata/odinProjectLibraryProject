@@ -1,0 +1,31 @@
+
+body{
+    display: grid;
+    grid-template: 2fr 11fr min(96px) / 1fr;
+    grid-template-areas: 
+        "header"
+        "body"
+        "footer";
+    margin: 0;
+}
+
+.header{
+    display: grid;
+    grid-area: header;
+    font-weight: 900;
+    font-size: min(80px);
+    align-items: center;
+    justify-content: center;
+    color: rgb(225, 226, 228);
+    padding: min(12px);
+    background-color: rgba(69, 119, 82, 0.864);
+}
+
+.body{
+    grid-area: body;
+}
+
+.footer{
+    grid-area: footer;
+    background-color: rgba(69, 119, 82, 0.864);
+}
