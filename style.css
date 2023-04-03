@@ -84,9 +84,10 @@ button{
     grid-template: 1fr / 1fr 1fr;
 }
 
-.read{
+.read,
+.delete{
     display: grid;
-    grid-template: 1fr  / 1fr 1fr;
+    grid-template: 1fr  / 1fr 3fr;
     font-weight: 900;
 }
 

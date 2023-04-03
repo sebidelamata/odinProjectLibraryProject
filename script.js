@@ -49,13 +49,15 @@ function displayLibrary(){
         let newDelete = document.createElement('div');
         let newDeleteIcon = document.createElement('div');
         newDeleteIcon.innerHTML = '<i class="fa fa-trash-o fa-fw"></i>';
-        let newDeleteText = createTextNode('Remove Book');
+        let newDeleteText = document.createElement('div');
+        newDeleteText.textContent = 'Remove';
         newDelete.classList.add('delete');
 
         let newRead = document.createElement('div');
         let newReadIcon = document.createElement('div');
         newReadIcon.innerHTML = '<i class="fa fa-book fa-fw"></i>';
-        let newReadText = createTextNode('Mark As Read');
+        let newReadText = document.createElement('div');
+        newReadText.textContent = 'Mark as Read';
         newRead.classList.add('read');
 
         let bookTitle = document.createTextNode(myLibrary[i].title);
