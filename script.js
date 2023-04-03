@@ -23,22 +23,6 @@ function addBookToLibrary(book){
     myLibrary[myLibrary.length] = book;
 }
 
-const book1 = new Book(
-    'DieHard',
-    'Bruce Whatshisface',
-    500,
-);
-
-const book2 = new Book(
-    'Who Wants To Be a Millionare',
-    'Young Dame Judy Dench',
-    1000000,
-);
-
-addBookToLibrary(book1);
-addBookToLibrary(book2);
-
-book2.readBook();
 
 function displayLibrary(){
 
@@ -59,6 +43,21 @@ function displayLibrary(){
         let newBookRead = document.createElement('div');
         newBookRead.classList.add('book-read');
 
+        let newOptions = document.createElement('div');
+        newOptions.classList.add('options');
+
+        let newDelete = document.createElement('div');
+        let newDeleteIcon = document.createElement('div');
+        newDeleteIcon.innerHTML = '<i class="fa fa-trash-o fa-fw"></i>';
+        let newDeleteText = createTextNode('Remove Book');
+        newDelete.classList.add('delete');
+
+        let newRead = document.createElement('div');
+        let newReadIcon = document.createElement('div');
+        newReadIcon.innerHTML = '<i class="fa fa-book fa-fw"></i>';
+        let newReadText = createTextNode('Mark As Read');
+        newRead.classList.add('read');
+
         let bookTitle = document.createTextNode(myLibrary[i].title);
         let bookAuthor = document.createTextNode(`by ${myLibrary[i].author}`);
         let bookPages = document.createTextNode(`${myLibrary[i].pages} pages`);
@@ -75,10 +74,18 @@ function displayLibrary(){
             newBookRead.style.color = 'grey'
         };      
 
+        newDelete.appendChild(newDeleteIcon);
+        newDelete.appendChild(newDeleteText);
+        newRead.appendChild(newReadIcon);
+        newRead.appendChild(newReadText);
+        newOptions.appendChild(newDelete);
+        newOptions.appendChild(newRead);
+
         newLi.appendChild(newBookTitle);
         newLi.appendChild(newBookAuthor);
         newLi.appendChild(newBookPages);
         newLi.appendChild(newBookRead);
+        newLi.appendChild(newOptions);
 
         bookList.appendChild(newLi);
 
@@ -167,6 +174,8 @@ function createFormOnButtonClick(){
         console.log(authorInput);
         console.log(pagesInput);
         console.log(readInput);
+
+        bookList.innerHTML = '';
 
         let newBook = new Book(
             titleInput,

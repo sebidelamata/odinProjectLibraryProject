@@ -67,7 +67,7 @@ button{
     background-color: blanchedalmond;
     padding: min(24px);
     border-radius: min(24px);
-    grid-template: 2fr 3fr 1fr 1fr / 1fr;
+    grid-template: 2fr 3fr 1fr 1fr 1fr / 1fr;
     box-shadow: 0 min(8px) 4px -4px gray;
     max-height: 40%;
 }
@@ -77,6 +77,17 @@ button{
     font-size: xx-large;
     align-items: center;
     justify-content: center;
+}
+
+.options{
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+}
+
+.read{
+    display: grid;
+    grid-template: 1fr  / 1fr 1fr;
+    font-weight: 900;
 }
 
 #add-book-form-container{
@@ -146,4 +157,6 @@ button{
     margin: 0;
     opacity: 85%;
 }
+
+
 
