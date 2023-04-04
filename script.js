@@ -3,7 +3,7 @@ const bookList = document.getElementById('book-list');
 const bodyClass = document.getElementsByClassName('body');
 const body = bodyClass[0];
 const addBookButton = document.getElementById('add-book-button');
-
+let deleteButtons;
 let myLibrary = [];
 
 function Book(title, author, pages, read){
@@ -92,6 +92,13 @@ function displayLibrary(){
         bookList.appendChild(newLi);
 
     }
+
+    console.log(myLibrary);
+
+
+    // need to do for each existing li add lister fo remove/read
+    deleteButtons = document.getElementsByClassName('delete');
+
 }
 
 function createFormOnButtonClick(){
@@ -171,11 +178,6 @@ function createFormOnButtonClick(){
         let authorInput = document.getElementById('author').value;
         let pagesInput = document.getElementById('pages').value;
         let readInput = document.getElementById('read').checked;
-    
-        console.log(titleInput);
-        console.log(authorInput);
-        console.log(pagesInput);
-        console.log(readInput);
 
         bookList.innerHTML = '';
 
@@ -216,9 +218,22 @@ function createFormOnButtonClick(){
 
 }
 
+// remove book card
+function removeBook(){
+    console.log('hi');
+    this.parentNode.remove();
+}
+
 
 displayLibrary();
 
-addBookButton.addEventListener('click', createFormOnButtonClick);
+if(deleteButtons !== undefined && deleteButtons.length > 0){
 
+    this.deleteButtons.forEach(function(button) {
+        button.addEventListener('click', removeBook, false);
+    });
+
+}
+
+addBookButton.addEventListener('click', createFormOnButtonClick);
 
