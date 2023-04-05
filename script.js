@@ -30,6 +30,7 @@ function displayLibrary(){
     for(let i = 0; i < myLibrary.length; i++){
 
         let newLi = document.createElement('li');
+        newLi.setAttribute('id', `${i}`);
 
         let newBookTitle = document.createElement('div');
         newBookTitle.classList.add('book-title');
@@ -97,7 +98,16 @@ function displayLibrary(){
 
 
     // need to do for each existing li add lister fo remove/read
-    deleteButtons = document.getElementsByClassName('delete');
+    deleteButtons = document.querySelectorAll('.delete');
+    //deleteButtons = document.getElementsByClassName('delete');
+
+    if(deleteButtons !== undefined && deleteButtons.length > 0){
+
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', removeBook);
+        });
+    
+    }
 
 }
 
@@ -219,21 +229,22 @@ function createFormOnButtonClick(){
 }
 
 // remove book card
-function removeBook(){
-    console.log('hi');
-    this.parentNode.remove();
+function removeBook(e){
+
+    let button = e.target;
+
+    let bookIndex = button.parentNode.parentNode.parentNode.id;
+
+    myLibrary.splice(bookIndex, 1);
+
+    console.log(myLibrary);
+
+    button.parentNode.parentNode.parentNode.remove();
 }
 
 
 displayLibrary();
 
-if(deleteButtons !== undefined && deleteButtons.length > 0){
-
-    this.deleteButtons.forEach(function(button) {
-        button.addEventListener('click', removeBook, false);
-    });
-
-}
-
 addBookButton.addEventListener('click', createFormOnButtonClick);
+
 
