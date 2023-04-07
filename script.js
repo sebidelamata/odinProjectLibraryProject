@@ -57,6 +57,7 @@ function displayLibrary(){
         let newRead = document.createElement('div');
         let newReadIcon = document.createElement('div');
         newReadIcon.innerHTML = '<i class="fa fa-book fa-fw"></i>';
+        newReadIcon.setAttribute('id', `read-${i}`);
         let newReadText = document.createElement('div');
         newReadText.textContent = 'Mark as Read';
         newRead.classList.add('read');
@@ -99,12 +100,21 @@ function displayLibrary(){
 
     // need to do for each existing li add lister fo remove/read
     deleteButtons = document.querySelectorAll('.delete');
-    //deleteButtons = document.getElementsByClassName('delete');
 
     if(deleteButtons !== undefined && deleteButtons.length > 0){
 
         deleteButtons.forEach(function(button) {
             button.addEventListener('click', removeBook);
+        });
+    
+    }
+    
+    readButtons = document.querySelectorAll('.read');
+
+    if(readButtons !== undefined && readButtons.length > 0){
+
+        readButtons.forEach(function(button) {
+            button.addEventListener('click', markBookRead);
         });
     
     }
@@ -240,6 +250,26 @@ function removeBook(e){
     console.log(myLibrary);
 
     button.parentNode.parentNode.parentNode.remove();
+}
+
+// similar to above
+function markBookRead(e){
+
+    let button = e.target;
+
+    let bookIndex = button.parentNode.parentNode.parentNode.id;
+
+    myLibrary[bookIndex].readBook();
+
+    let bookReadText = button.parentNode.parentNode.parentNode.getElementsByClassName('book-read');
+
+    bookReadText = bookReadText[0];
+
+    bookReadText.style.fontStyle = 'italic'; 
+    
+    bookReadText.style.fontWeight = '100';
+
+    bookReadText.textContent = 'You have read this book.';
 }
 
 
