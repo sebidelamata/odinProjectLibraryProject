@@ -27,6 +27,11 @@ function addBookToLibrary(book){
 
 function displayLibrary(){
 
+    // clear old library first
+    while(bookList.hasChildNodes()){
+        bookList.firstChild.remove();
+    }
+
     // create a card for each book in the library consisting of its info
     for(let i = 0; i < myLibrary.length; i++){
 
@@ -117,55 +122,6 @@ function displayLibrary(){
         });
     
     }
-
-    // remove book card
-function removeBook(e){
-
-    let button = e.target;
-
-    let bookIndex = button.parentNode.parentNode.parentNode.id;
-
-    if(button.classList[0] === 'fa'){
-        bookIndex = button.parentNode.parentNode.parentNode.parentNode.id;
-    }
-
-    myLibrary.splice(bookIndex, 1);
-
-    if(button.classList[0] === 'fa'){
-        button.parentNode.parentNode.parentNode.parentNode.remove();
-    } else {
-        button.parentNode.parentNode.parentNode.remove();
-    }
-
-}
-
-// similar to above
-function markBookRead(e){
-
-    let button = e.target;
-
-    let bookIndex = button.parentNode.parentNode.parentNode.id;
-
-    if(button.classList[0] === 'fa'){
-        bookIndex = button.parentNode.parentNode.parentNode.parentNode.id;
-    }
-
-    myLibrary[bookIndex].readBook();
-
-    let bookReadText = button.parentNode.parentNode.parentNode.getElementsByClassName('book-read');
-
-    if(button.classList[0] === 'fa'){
-        bookReadText = button.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('book-read');
-    }
-
-    bookReadText = bookReadText[0];
-
-    bookReadText.style.fontStyle = 'italic'; 
-    
-    bookReadText.style.fontWeight = '100';
-
-    bookReadText.textContent = 'You have read this book.';
-}
 
     console.log(myLibrary);
 
@@ -286,6 +242,39 @@ function createFormOnButtonClick(){
     Bookform.addEventListener('submit', submitButtonClick, false);
 
 
+}
+
+// remove book card
+function removeBook(e){
+
+    let button = e.target;
+
+    let bookIndex = button.parentNode.parentNode.parentNode.id;
+
+    if(button.classList[0] === 'fa'){
+        bookIndex = button.parentNode.parentNode.parentNode.parentNode.id;
+    }
+
+    myLibrary.splice(bookIndex, 1);
+
+    displayLibrary();
+
+}
+
+// similar to above
+function markBookRead(e){
+
+    let button = e.target;
+
+    let bookIndex = button.parentNode.parentNode.parentNode.id;
+
+    if(button.classList[0] === 'fa'){
+        bookIndex = button.parentNode.parentNode.parentNode.parentNode.id;
+    }
+
+    myLibrary[bookIndex].readBook();
+
+    displayLibrary();
 }
 
 
