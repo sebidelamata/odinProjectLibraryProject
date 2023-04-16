@@ -7,18 +7,20 @@ let deleteButtons;
 let readButtons;
 let myLibrary = [];
 
-function Book(title, author, pages, read){
+class Book{
 
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = false;
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = false;
+    }
 
-    this.readBook = function(){
+    readBook () {
         this.read = true;
     }
 
-}
+};
 
 function addBookToLibrary(book){
     myLibrary[myLibrary.length] = book;
