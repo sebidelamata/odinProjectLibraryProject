@@ -148,6 +148,7 @@ function createFormOnButtonClick(){
     formNewBookTitleInput.setAttribute('type', 'text');
     formNewBookTitleInput.setAttribute('id', 'title');
     formNewBookTitleInput.setAttribute('name', 'title');
+    formNewBookTitleInput.required = true;
 
     let formNewBookAuthor = document.createElement('label')
     formNewBookAuthor.setAttribute('for', 'author')
@@ -157,6 +158,7 @@ function createFormOnButtonClick(){
     formNewBookAuthorInput.setAttribute('type', 'text');
     formNewBookAuthorInput.setAttribute('id', 'author');
     formNewBookAuthorInput.setAttribute('name', 'author');
+    formNewBookAuthorInput.required = true;
 
     let formNewBookPages = document.createElement('label')
     formNewBookPages.setAttribute('for', 'pages')
@@ -164,6 +166,7 @@ function createFormOnButtonClick(){
     formNewBookPages.appendChild(formNewBookPagesText);
     let formNewBookPagesInput = document.createElement('input');
     formNewBookPagesInput.setAttribute('type', 'number');
+    formNewBookPagesInput.min = 1;
     formNewBookPagesInput.setAttribute('id', 'pages');
     formNewBookPagesInput.setAttribute('name', 'pages');
 
